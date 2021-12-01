@@ -1,5 +1,5 @@
 pub fn input_day1(input: &str) -> Vec<u32> {
-    input.lines().filter_map(|s| s.parse::<u32>().ok()).collect()
+    input.lines().filter_map(|s| s.parse().ok()).collect()
 }
 
 pub fn solve_part1(input: &[u32]) -> u32 {
