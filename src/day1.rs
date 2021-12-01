@@ -35,13 +35,13 @@ mod test {
         let input = include_str!("../input/2021/day1.txt");
         let parsed_input = input_day1(input);
         let result = solve_part1(&parsed_input);
-        eprintln!("day1_part1: {}", result);
+        dbg!(result);
     }
     #[test]
     fn day1_part2() {
         let input = include_str!("../input/2021/day1.txt");
         let parsed_input = input_day1(input);
         let result = solve_part2(&parsed_input);
-        eprintln!("day1_part2: {}", result);
+        dbg!(result);
     }
 }
