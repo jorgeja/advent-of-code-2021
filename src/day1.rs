@@ -1,8 +1,8 @@
-pub fn input_day1(input: &str) -> Vec<u32> {
+fn input_day1(input: &str) -> Vec<u32> {
     input.lines().filter_map(|s| s.parse().ok()).collect()
 }
 
-pub fn solve_part1(input: &[u32]) -> u32 {
+fn solve_part1(input: &[u32]) -> u32 {
     let mut last = 0;
     let mut increases = 0;
     for i in input.iter() {
@@ -14,7 +14,7 @@ pub fn solve_part1(input: &[u32]) -> u32 {
     increases
 }
 
-pub fn solve_part2(input: &[u32]) -> u32 {
+fn solve_part2(input: &[u32]) -> u32 {
     let mut last = 0;
     let mut increases = 0;
     for window in input.windows(3) {
