@@ -28,7 +28,7 @@ fn solve_part2(input: &[u32]) -> u32 {
 }
 
 #[cfg(test)]
-mod test_day1 {    
+mod test_day1 {
     use super::{input_day1, solve_part1, solve_part2};
     #[test]
     fn day1_part1() {

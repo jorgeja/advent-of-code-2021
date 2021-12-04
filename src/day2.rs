@@ -1,22 +1,25 @@
 enum SubCommand {
     Up(i32),
     Down(i32),
-    Forward(i32)
+    Forward(i32),
 }
 
 fn input_day2(input: &str) -> Vec<SubCommand> {
-    input.lines().filter_map(|s| {
-        let mut parts = s.split_whitespace();
-        let str_cmd = parts.next().unwrap();
-        let value = parts.next().unwrap().parse::<i32>().unwrap();
-        match str_cmd {
-            "up" => SubCommand::Up(value),
-            "down" => SubCommand::Down(value),
-            "forward" => SubCommand::Forward(value),
-            _ => unreachable!()
-        }.into()
-
-    }).collect()
+    input
+        .lines()
+        .filter_map(|s| {
+            let mut parts = s.split_whitespace();
+            let str_cmd = parts.next().unwrap();
+            let value = parts.next().unwrap().parse::<i32>().unwrap();
+            match str_cmd {
+                "up" => SubCommand::Up(value),
+                "down" => SubCommand::Down(value),
+                "forward" => SubCommand::Forward(value),
+                _ => unreachable!(),
+            }
+            .into()
+        })
+        .collect()
 }
 
 fn solve_part1(input: &[SubCommand]) -> i32 {
@@ -45,14 +48,14 @@ fn solve_part2(input: &[SubCommand]) -> i32 {
             SubCommand::Forward(v) => {
                 horizontal_pos += v;
                 depth += aim * v;
-            },
+            }
         }
     }
     horizontal_pos * depth
 }
 
 #[cfg(test)]
-mod test_day2 {    
+mod test_day2 {
     use super::{input_day2, solve_part1, solve_part2};
     #[test]
     fn day2_part1() {
