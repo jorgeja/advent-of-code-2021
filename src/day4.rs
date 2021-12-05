@@ -17,6 +17,7 @@ impl BingoBoard {
             has_won: false,
         }
     }
+
     fn add_row(&mut self, row: &[usize]) {
         for (col, n) in row.iter().enumerate() {
             self.numbers.insert(*n, (self.current_row, col));
@@ -24,8 +25,8 @@ impl BingoBoard {
         self.current_row += 1
     }
 
-    fn check_number(&mut self, number: usize) -> Option<usize>{
-        if let Some((row, col)) = self.numbers.get(&number) {            
+    fn check_number(&mut self, number: usize) -> Option<usize> {
+        if let Some((row, col)) = self.numbers.get(&number) {
             if self.mark_board(*row, *col) {
                 self.has_won = true;
                 return self.sum_unmarked().into();
@@ -35,7 +36,7 @@ impl BingoBoard {
     }
 
     fn mark_board(&mut self, row: usize, col: usize) -> bool {
-        self.board[row][col] = true;        
+        self.board[row][col] = true;
         let row_complete = {
             let mut all_good = true;
             for i in 0..5 {
@@ -77,7 +78,7 @@ impl BingoBoard {
             }
         }
         sum
-    } 
+    }
 }
 
 fn input_day4(input: &str) -> (Vec<usize>, Vec<BingoBoard>) {
@@ -111,7 +112,7 @@ fn solve_part1(chosen_numbers: &[usize], boards: &mut [BingoBoard]) -> usize {
     for num in chosen_numbers {
         for board in boards.iter_mut() {
             if let Some(res) = board.check_number(*num) {
-                return res * num
+                return res * num;
             }
         }
     }
@@ -123,7 +124,7 @@ fn solve_part2(chosen_numbers: &[usize], boards: &mut [BingoBoard]) -> usize {
     for num in chosen_numbers {
         for board in boards.iter_mut() {
             if !board.has_won {
-                if let Some(res) = board.check_number(*num) {                
+                if let Some(res) = board.check_number(*num) {
                     last_score = res * num;
                 }
             }
