@@ -35,12 +35,7 @@ impl IntoIterator for Line {
         
         let length = if v_length != 0 { v_length.abs() } else { h_length.abs() } + 1;
         
-        LineIterator {
-            start: self.c1.clone(),
-            length,
-            index_factor,
-            pos: 0,
-        }
+        LineIterator::new(self.c1.clone(), length, index_factor)
     }
 }
 
@@ -52,16 +47,26 @@ struct LineIterator{
     pos: i32,
 }
 
+impl LineIterator {
+    fn new(start: Coord, length: i32, index_factor: (i32, i32)) -> Self {
+        Self {
+            start,
+            length,
+            index_factor,
+            pos: -1,
+        }
+    }
+}
+
 //
 impl Iterator for LineIterator {
     type Item = Coord;
     fn next(&mut self) -> Option<Self::Item> {
+        self.pos += 1;
         if self.pos == self.length {
             None
         } else {
-            let item = (self.start.0 + self.pos * self.index_factor.0, self.start.1 + self.pos * self.index_factor.1).into();
-            self.pos += 1;
-            item
+            (self.start.0 + self.pos * self.index_factor.0, self.start.1 + self.pos * self.index_factor.1).into()            
         }                
     }
 }
