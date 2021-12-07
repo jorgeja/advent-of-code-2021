@@ -1,10 +1,6 @@
 fn input_day6(input: &str) -> Vec<u32> {
     input.split(',').filter_map(|s| {
-        let n = s.parse::<u32>();
-        if n.is_err() {
-            eprintln!("Could not parse {}", s)
-        }
-        n.ok()
+        s.trim_end().parse::<u32>().ok()
     }).collect()
 }
 
@@ -23,7 +19,6 @@ fn solve_part1(mut fish: Vec<u32>, days: u32) -> usize {
         for _ in 0..new_fish {
             fish.push(8);
         }
-        //eprintln!("After {} days: {:?}", _i + 1, fish);
     }
     fish.len()
 }
@@ -67,7 +62,6 @@ mod test_day6 {
     fn day6_part1() {
         let input = include_str!("../input/2021/day6.txt");
         let mut parsed_input = input_day6(input);        
-        parsed_input.push(4);
         let result = solve_part1(parsed_input, 80);
         dbg!(result);
     }
@@ -76,7 +70,6 @@ mod test_day6 {
     fn day6_part2_test() {
         let input = include_str!("../input/2021/day6_part1_test.txt");
         let parsed_input = input_day6(input);
-        
         let result = solve_part2(parsed_input, 18);
         assert_eq!(result, 26);
         let parsed_input = input_day6(input);
@@ -88,7 +81,6 @@ mod test_day6 {
     fn day6_part2() {
         let input = include_str!("../input/2021/day6.txt");
         let mut parsed_input = input_day6(input);        
-        parsed_input.push(4);
         let result = solve_part2(parsed_input, 256);
         dbg!(result);
     }
