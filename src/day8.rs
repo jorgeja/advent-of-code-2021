@@ -46,6 +46,28 @@ fn solve_part2(input: &[SegmentNote]) -> u32 {
     0
 }
 
+fn solve_segment(note: &SegmentNote) {
+    let mut numbers = Vec::new();
+    let mut possible_char_pos = Vec::new();
+    for s in &note.0 {
+        match s.len() {
+            2 => {
+                numbers.push((s.clone(), 1));
+                let mut chars = s.chars();
+                possible_char_pos.push((chars.next().unwrap(), vec!['c', 'f']));
+                possible_char_pos.push((chars.next().unwrap(), vec!['c', 'f']));
+            }
+            3 => {
+                numbers.push((s.clone(), 7));
+                let mut chars = s.chars();
+                possible_char_pos.push((chars.next().unwrap(), vec!['a', 'c', 'f']));
+                possible_char_pos.push((chars.next().unwrap(), vec!['', 'c', 'f']));
+                possible_char_pos.push((chars.next().unwrap(), vec!['c', 'f']));
+            }
+        }
+    }
+}
+
 #[cfg(test)]
 mod test_day8 {
     use super::{input_day8, solve_part1, solve_part2};
