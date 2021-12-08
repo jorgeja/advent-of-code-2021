@@ -80,7 +80,7 @@ mod test_day6 {
     #[test]
     fn day6_part2() {
         let input = include_str!("../input/2021/day6.txt");
-        let mut parsed_input = input_day6(input);        
+        let parsed_input = input_day6(input);        
         let result = solve_part2(parsed_input, 256);
         dbg!(result);
     }
