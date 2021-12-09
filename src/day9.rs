@@ -44,7 +44,7 @@ fn find_neighbor_lowpoints(row: i32, col: i32, input: &Vec<Vec<usize>>) -> Vec<(
         }
 
         let nv = input[r as usize][c as usize];
-        if v < nv && nv < 9 { 
+        if (v < nv || nv < v) && nv < 9 { 
             Some((r, c))
         } else {
             None
@@ -66,24 +66,33 @@ fn solve_part2(input: Vec<Vec<usize>>) -> u32 {
                 loop {
                     let mut new_pending_locations = Vec::new();
                     for (row, col) in pending_locations.iter() {
-                        num_basin_locations += 1;
-                        in_basin.insert((*row, *col));
-                        new_pending_locations.extend(find_neighbor_lowpoints(*row, *col, &input));
+                        if !in_basin.contains(&(*row, *col)) {                            
+                            in_basin.insert((*row, *col));
+                            if input[*row as usize][*col as usize] < 9 {
+                                new_pending_locations.extend(find_neighbor_lowpoints(*row, *col, &input));
+                                num_basin_locations += 1;                                                        
+                            }                                                        
+                        }                        
                     }
                     if new_pending_locations.len() == 0 {
                         break;
-                    } else {
-                        pending_locations.clear();
-                        pending_locations.extend(new_pending_locations);
+                    } else {                        
+                        pending_locations = new_pending_locations;
                     }                                
                 } 
                 basins.push(num_basin_locations);           
+            } else {
+
             }
         }
     }
     basins.sort();
-    eprintln!("{:?}", basins);
-    0    
+    let l = basins.len();
+    if l >= 3 {
+        basins[l-1] * basins[l-2] * basins[l-3]    
+    } else {
+        0
+    }
 }
 
 #[cfg(test)]
