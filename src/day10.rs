@@ -1,5 +1,4 @@
-use core::num;
-use std::{collections::HashMap, iter::Enumerate};
+use std::collections::HashMap;
 
 fn error_bonus (closing_char: u8) -> usize{
     match closing_char {
